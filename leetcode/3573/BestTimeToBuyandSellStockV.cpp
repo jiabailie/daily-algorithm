@@ -4,6 +4,8 @@
 
 #include "BestTimeToBuyandSellStockV.h"
 
+#include <array>
+#include <climits>
 #include <iostream>
 #include <vector>
 
