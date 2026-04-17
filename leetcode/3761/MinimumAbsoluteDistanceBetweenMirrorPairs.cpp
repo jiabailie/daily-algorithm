@@ -5,6 +5,7 @@
 #include "MinimumAbsoluteDistanceBetweenMirrorPairs.h"
 
 #include <algorithm>
+#include <climits>
 #include <vector>
 #include <iostream>
 #include <unordered_map>
