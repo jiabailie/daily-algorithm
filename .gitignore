@@ -43,3 +43,6 @@
 # System file
 .DS_Store
 .idea
+
+# Local file
+build

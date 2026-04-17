@@ -1,14 +1,16 @@
 # daily-algorithm
 
 This repository contains C++ solutions for algorithm problems, currently organized around LeetCode problem IDs.
-Each problem is implemented as a small class under `leetcode/<problem-id>/`, and the project is built as a single CMake executable for quick local testing.
+Each problem is implemented as a small class under `leetcode/<problem-id>/`, and the project is built with CMake for quick local runs plus a small CTest smoke test target.
 
 ## Overview
 
 - Language: C++
+- C++ standard: C++17
 - Build system: CMake
 - Main executable: `algorithm`
-- Current workflow: add a problem class, register it in its `.cpp` file, rebuild, and run it by problem id
+- Test executable: `algorithm_tests`
+- Current workflow: add a problem class, register it in its `.cpp` file, rebuild, run it by problem id, and verify registration through CTest
 
 The codebase is set up for iterative problem solving rather than as a reusable library. Each solution class usually contains:
 
@@ -16,19 +18,20 @@ The codebase is set up for iterative problem solving rather than as a reusable l
 - a lightweight `test()` entry point for local verification
 - a small self-registration hook so `main.cpp` can discover it automatically
 
-## Build And Run
+## Build And Test
 
 ### Option 1: Build with CMake manually
 
 ```bash
-cmake -S . -B cmake-build-debug
-cmake --build cmake-build-debug
-./cmake-build-debug/algorithm 3488
+cmake -S . -B build
+cmake --build build
+./build/algorithm 3488
+ctest --test-dir build --output-on-failure
 ```
 
 ### Option 2: Use an IDE with CMake support
 
-This repository also works well with CLion or other IDEs that understand `CMakeLists.txt`. The existing `cmake-build-debug/` directory suggests that is the current local workflow.
+This repository also works well with CLion or other IDEs that understand `CMakeLists.txt`.
 
 ## Repository Structure
 
@@ -37,17 +40,21 @@ This repository also works well with CLion or other IDEs that understand `CMakeL
 ├── CMakeLists.txt
 ├── main.cpp
 ├── README.md
+├── tests
+│   └── algorithm_smoke_tests.cpp
 └── leetcode
     ├── Base.h
     ├── 3488/
     ├── 3573/
-    └── 3650/
+    ├── 3650/
+    └── 3761/
 ```
 
 ### Key Files
 
-- `CMakeLists.txt`: defines the `algorithm` executable and auto-discovers files under `leetcode/`
+- `CMakeLists.txt`: defines the main executable, the smoke-test target, and auto-discovers files under `leetcode/`
 - `main.cpp`: looks up a solution by problem id and runs its `test()` method
+- `tests/algorithm_smoke_tests.cpp`: verifies that solution classes are registered and constructible through the shared registry
 - `leetcode/Base.h`: defines the shared base class plus the solution registry used by the runner
 - `leetcode/<problem-id>/`: contains one problem per folder, typically with a `.h` and `.cpp` pair
 
@@ -96,14 +103,26 @@ This keeps local verification simple without requiring per-problem edits to `mai
 ### To run a different problem
 
 ```bash
-./cmake-build-debug/algorithm <problem-id>
+./build/algorithm <problem-id>
 ```
 
 Example:
 
 ```bash
-./cmake-build-debug/algorithm 3573
+./build/algorithm 3573
 ```
+
+## Tests
+
+The repository includes a minimal CTest smoke test that validates the solution registry and ensures known problem IDs can be instantiated.
+
+Run it locally with:
+
+```bash
+ctest --test-dir build --output-on-failure
+```
+
+The smoke test lives in `tests/algorithm_smoke_tests.cpp`. As the repository grows, additional test binaries can be added and registered with `add_test(...)` in `CMakeLists.txt`.
 
 ## Adding A New Problem
 
@@ -114,7 +133,8 @@ To add a new LeetCode solution:
 3. Inherit the class from `Base`.
 4. Declare and implement `void test() override;`.
 5. Register the solution in the `.cpp` file using `REGISTER_LEETCODE_SOLUTION`.
-6. Rebuild and run `./cmake-build-debug/algorithm <problem-id>`.
+6. Rebuild and run `./build/algorithm <problem-id>`.
+7. Run `ctest --test-dir build --output-on-failure` to verify the registry-based smoke test still passes.
 
 Example registration:
 
@@ -125,6 +145,11 @@ REGISTER_LEETCODE_SOLUTION("1234", leetcode::SomeProblem);
 ## Notes
 
 - `CMakeLists.txt` now auto-discovers files under `leetcode/`, so new solution files do not need to be added manually.
-- The project builds all registered solution files into a single executable.
+- The project builds all registered solution files into both the main executable and the smoke-test binary.
 - If a `.cpp` file defines `ClassName::test()`, the header must also declare `void test() override;`.
 - Local tests are intentionally lightweight and stdout-based, which is convenient for daily practice and debugging.
+
+## CI
+
+GitHub Actions builds this repository on both `ubuntu-latest` and `macos-latest`.
+The workflow configures the project with CMake, builds it, and runs CTest when tests are defined.
