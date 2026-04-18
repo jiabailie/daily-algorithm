@@ -19,11 +19,11 @@ namespace leetcode {
             return {};
         }
 
-        double PI = 180.0 / std::acos(-1);
+        double RADIAN_TO_DEGREE = 180.0 / std::acos(-1);
 
-        double angleA = std::acos((b * b + c * c - a * a) / (2 * b * c)) * PI;
-        double angleB = std::acos((a * a + c * c - b * b) / (2 * a * c)) * PI;
-        double angleC = std::acos((a * a + b * b - c * c) / (2 * a * b)) * PI;
+        double angleA = std::acos((b * b + c * c - a * a) / (2 * b * c)) * RADIAN_TO_DEGREE;
+        double angleB = std::acos((a * a + c * c - b * b) / (2 * a * c)) * RADIAN_TO_DEGREE;
+        double angleC = std::acos((a * a + b * b - c * c) / (2 * a * b)) * RADIAN_TO_DEGREE;
 
         std::vector<double> angles = {
             angleA, angleB, angleC
