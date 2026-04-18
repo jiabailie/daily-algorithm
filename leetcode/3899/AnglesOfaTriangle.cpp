@@ -4,6 +4,7 @@
 
 #include "AnglesOfaTriangle.h"
 
+#include <cmath>
 #include <iostream>
 #include <ostream>
 #include <vector>
