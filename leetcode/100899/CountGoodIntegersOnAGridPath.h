@@ -5,7 +5,6 @@
 #ifndef ALGORITHM_COUNTGOODINTEGERSONAGRIDPATH_H
 #define ALGORITHM_COUNTGOODINTEGERSONAGRIDPATH_H
 
-#include <cstring>
 #include "../Base.h"
 
 typedef long long ll;
