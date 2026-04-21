@@ -1,11 +1,9 @@
 #include <algorithm>
+#include <cstdlib>
 #include <filesystem>
 #include <iostream>
-#include <memory>
 #include <string>
 #include <vector>
-
-#include "leetcode/Base.h"
 
 namespace {
     std::vector<std::string> discover_problem_ids() {
@@ -16,38 +14,34 @@ namespace {
             if (!entry.is_directory()) {
                 continue;
             }
-            problem_ids.push_back(entry.path().filename().string());
+
+            const std::string name = entry.path().filename().string();
+            if (!std::all_of(name.begin(), name.end(), ::isdigit)) {
+                continue;
+            }
+            problem_ids.push_back(name);
         }
 
         std::sort(problem_ids.begin(), problem_ids.end());
         return problem_ids;
     }
-
-    bool contains(const std::vector<std::string>& values, const std::string& target) {
-        return std::find(values.begin(), values.end(), target) != values.end();
-    }
 }
 
 int main() {
-    const std::vector<std::string> expected_ids = discover_problem_ids();
-    const std::vector<std::string> registered_ids = SolutionRegistry::instance().keys();
+    const std::vector<std::string> problem_ids = discover_problem_ids();
 
-    bool passed = true;
-
-    if (expected_ids.empty()) {
+    if (problem_ids.empty()) {
         std::cerr << "No problem directories were found under leetcode/" << '\n';
         return 1;
     }
 
-    for (const std::string& problem_id : expected_ids) {
-        if (!contains(registered_ids, problem_id)) {
-            std::cerr << "Missing registry entry for problem id " << problem_id << '\n';
-            passed = false;
-        }
-
-        std::unique_ptr<Base> solution = SolutionRegistry::instance().create(problem_id);
-        if (solution == nullptr) {
-            std::cerr << "Failed to construct solution for problem id " << problem_id << '\n';
+    bool passed = true;
+    const std::filesystem::path executable = std::filesystem::path(ALGORITHM_BINARY_PATH);
+    for (const std::string& problem_id : problem_ids) {
+        const std::string command = "\"" + executable.string() + "\" " + problem_id + " > /dev/null";
+        const int exitCode = std::system(command.c_str());
+        if (exitCode != 0) {
+            std::cerr << "Failed to run problem id " << problem_id << '\n';
             passed = false;
         }
     }
@@ -56,6 +50,6 @@ int main() {
         return 1;
     }
 
-    std::cout << "Registered " << registered_ids.size() << " solutions." << std::endl;
+    std::cout << "Validated " << problem_ids.size() << " solutions." << std::endl;
     return 0;
 }

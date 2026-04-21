@@ -18,6 +18,8 @@ enable_testing()
 
 add_executable(algorithm_tests tests/algorithm_smoke_tests.cpp $<TARGET_OBJECTS:algorithm_objs>)
 target_include_directories(algorithm_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-target_compile_definitions(algorithm_tests PRIVATE ALGORITHM_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
+target_compile_definitions(algorithm_tests PRIVATE
+        ALGORITHM_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}"
+        ALGORITHM_BINARY_PATH="$<TARGET_FILE:algorithm>")
 
 add_test(NAME algorithm_registry_smoke COMMAND algorithm_tests)
