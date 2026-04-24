@@ -15,7 +15,7 @@ namespace leetcode {
         for (char c: moves) {
             if (c == 'R') {
                 cntR++;
-            } else {
+            } else if (c == 'L') {
                 cntL++;
             }
         }
@@ -26,9 +26,10 @@ namespace leetcode {
         std::vector<std::string> moves {
             "L_RL__R",
             "_R__LL_",
-            "_______"
+            "_______",
+            "R_"
         };
-        std::vector<int> expect { 3,5,7 };
+        std::vector<int> expect { 3,5,7,2 };
 
         for (int i = 0; i < expect.size(); i++) {
             int actual = furthestDistanceFromOrigin(moves[i]);
