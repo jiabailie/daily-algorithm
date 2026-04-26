@@ -12,7 +12,7 @@ namespace leetcode {
     bool DetectCyclesIn2DGrid::containsCycle(std::vector<std::vector<char>>& grid) {
         int m = grid.size();
         int n = grid[0].size();
-        std::vector visited(m, std::vector<int8_t>(n));
+        std::vector visited(m, std::vector<bool>(n));
 
         auto dfs = [&](auto&& dfs, int x, int y, int px, int py) -> bool {
             visited[x][y] = true;
