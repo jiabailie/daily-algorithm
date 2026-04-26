@@ -16,9 +16,9 @@ namespace leetcode {
 
         auto dfs = [&](auto&& dfs, int x, int y, int px, int py) -> bool {
             visited[x][y] = true;
-            for (auto [dx, dy]: DIRS) {
-                int i = x + dx;
-                int j = y + dy;
+            for (const auto& dir: DIRS) {
+                int i = x + dir[0];
+                int j = y + dir[1];
                 if ((i != px || j != py) && // not its previous point
                     0 <= i && i < m && 0 <= j && j < n && // point in the grid
                     grid[i][j] == grid[x][y] && // contains the same character
