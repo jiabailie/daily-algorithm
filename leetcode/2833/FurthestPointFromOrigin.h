@@ -5,7 +5,6 @@
 #ifndef ALGORITHM_FURTHESTPOINTFROMORIGIN_H
 #define ALGORITHM_FURTHESTPOINTFROMORIGIN_H
 
-#include <cstring>
 #include "../Base.h"
 
 namespace leetcode {
