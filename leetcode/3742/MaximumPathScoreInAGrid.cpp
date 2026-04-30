@@ -4,6 +4,7 @@
 
 #include "MaximumPathScoreInAGrid.h"
 
+#include <climits>
 #include <iostream>
 
 namespace leetcode {
