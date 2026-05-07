@@ -4,6 +4,7 @@
 
 #include "JumpGameIX.h"
 
+#include <climits>
 #include <iostream>
 
 namespace leetcode {
