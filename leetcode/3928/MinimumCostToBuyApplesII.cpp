@@ -5,6 +5,7 @@
 #include "MinimumCostToBuyApplesII.h"
 
 #include <climits>
+#include <queue>
 #include <iostream>
 #include <ostream>
 
