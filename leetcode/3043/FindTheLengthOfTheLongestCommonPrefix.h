@@ -5,11 +5,16 @@
 #ifndef ALGORITHM_FINDTHELENGTHOFTHELONGESTCOMMONPREFIX_H
 #define ALGORITHM_FINDTHELENGTHOFTHELONGESTCOMMONPREFIX_H
 
+#include "../Base.h"
 
-
-class FindTheLengthOfTheLongestCommonPrefix {
-
-};
+namespace leetcode {
+    class FindTheLengthOfTheLongestCommonPrefix: public Base{
+    public:
+        int longestCommonPrefix1(std::vector<int>& arr1, std::vector<int>& arr2);
+        int longestCommonPrefix2(std::vector<int>& arr1, std::vector<int>& arr2);
+        void test() override;
+    };
+}
 
 
 
