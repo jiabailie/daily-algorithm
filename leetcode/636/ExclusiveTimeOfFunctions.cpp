@@ -5,6 +5,7 @@
 #include "ExclusiveTimeOfFunctions.h"
 
 #include <iostream>
+#include <stack>
 
 namespace leetcode {
     std::vector<int> ExclusiveTimeOfFunctions::exclusiveTime(int n, std::vector<std::string> &logs) {
