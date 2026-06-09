@@ -4,10 +4,8 @@
 
 #include "NumberOfStudentsUnableToEatLunch.h"
 
-#include <deque>
 #include <iostream>
 #include <ostream>
-#include <queue>
 
 namespace leetcode {
     int NumberOfStudentsUnableToEatLunch::countStudents(std::vector<int> &students, std::vector<int> &sandwiches) {
@@ -16,18 +14,10 @@ namespace leetcode {
             cnt[x]++;
         }
 
-        std::queue<int> ique(std::deque<int>(students.begin(), students.end()));
         for (int s: sandwiches) {
             if (cnt[s] == 0) {
-                return ique.size();
+                return cnt[1 - s];
             }
-
-            while (ique.front() != s) {
-                int front = ique.front();
-                ique.pop();
-                ique.push(front);
-            }
-            ique.pop();
             cnt[s]--;
         }
         return 0;
