@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <ostream>
+#include <queue>
+#include <tuple>
 
 namespace leetcode {
     long long MaximumTotalSubarrayValueII::maxTotalValue(std::vector<int> &nums, int k) {
