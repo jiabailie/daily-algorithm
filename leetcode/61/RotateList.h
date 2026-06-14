@@ -11,7 +11,6 @@
 namespace leetcode {
     class RotateList: public Base{
     public:
-        common::ListNode* buildListNode(std::vector<int>& nums);
         common::ListNode* rotateRight(common::ListNode* head, int k);
         void test() override;
     };
