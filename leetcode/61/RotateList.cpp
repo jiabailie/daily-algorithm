@@ -8,22 +8,6 @@
 #include <ostream>
 
 namespace leetcode {
-    common::ListNode *RotateList::buildListNode(std::vector<int> &nums) {
-        int n = nums.size();
-        if (n == 0) {
-            return nullptr;
-        }
-
-        common::ListNode* head = new common::ListNode(nums[0]);
-        common::ListNode* cursor = head;
-        for (int i = 1; i < n; ++i) {
-            common::ListNode* next = new common::ListNode(nums[i]);
-            cursor->next = next;
-            cursor = next;
-        }
-        return head;
-    }
-
     common::ListNode *RotateList::rotateRight(common::ListNode *head, int k) {
         if (head == nullptr) {
             return nullptr;
@@ -66,7 +50,7 @@ namespace leetcode {
             {2,3,1}
         };
         for (int i = 0; i < expect.size(); ++i) {
-            common::ListNode* head = buildListNode(nums[i]);
+            common::ListNode* head = common::buildList(nums[i]);
             common::ListNode* actualList = rotateRight(head, ks[i]);
 
             std::vector<int> actual;
