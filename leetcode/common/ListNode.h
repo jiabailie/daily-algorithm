@@ -17,6 +17,23 @@ namespace leetcode::common {
         ListNode(int x) : val(x), next(nullptr) {}
     };
 
+    // Build List
+    auto buildList = [](std::vector<int> &nums) -> ListNode* {
+        int n = nums.size();
+        if (n == 0) {
+            return nullptr;
+        }
+
+        ListNode* head = new ListNode(nums[0]);
+        ListNode* cursor = head;
+        for (int i = 1; i < n; ++i) {
+            ListNode* next = new ListNode(nums[i]);
+            cursor->next = next;
+            cursor = next;
+        }
+        return head;
+    };
+
     // Release ListNode
     auto delList = [](ListNode* head) {
         while (head) {
