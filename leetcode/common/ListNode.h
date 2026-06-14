@@ -17,9 +17,8 @@ namespace leetcode::common {
         ListNode(int x) : val(x), next(nullptr) {}
     };
 
-    // Build List
-    auto buildList = [](std::vector<int> &nums) -> ListNode* {
-        int n = nums.size();
+    inline ListNode* buildList(const std::vector<int> &nums) {
+        int n = static_cast<int>(nums.size());
         if (n == 0) {
             return nullptr;
         }
@@ -32,16 +31,15 @@ namespace leetcode::common {
             cursor = next;
         }
         return head;
-    };
+    }
 
-    // Release ListNode
-    auto delList = [](ListNode* head) {
+    inline void delList(ListNode* head) {
         while (head) {
             ListNode* tmp = head;
             head = head->next;
             delete tmp;
         }
-    };
+    }
 }
 
 #endif //ALGORITHM_LISTNODE_H
