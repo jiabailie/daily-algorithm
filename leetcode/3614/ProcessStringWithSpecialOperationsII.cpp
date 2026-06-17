@@ -54,4 +54,4 @@ namespace leetcode {
     }
 }
 
-REGISTER_LEETCODE_SOLUTION_IMPL("3614", leetcode::ProcessStringWithSpecialOperationsII);
+REGISTER_LEETCODE_SOLUTION("3614", leetcode::ProcessStringWithSpecialOperationsII);
