@@ -7,6 +7,8 @@
 #include <climits>
 #include <iostream>
 #include <ostream>
+#include <queue>
+#include <tuple>
 
 namespace leetcode {
     int ShortestPathWithAtMostKConsecutiveIdenticalCharacters::shortestPath(int n, std::vector<std::vector<int> > &edges, std::string labels, int k) {
