@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <ostream>
+#include <queue>
 
 namespace leetcode {
     std::vector<std::vector<int> > MinimumEnergyToMaintainBrightness::mergeIntervals(std::vector<std::vector<int> > &intervals) {
