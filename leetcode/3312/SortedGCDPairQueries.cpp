@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <ostream>
+#include <numeric>
 
 namespace leetcode {
     std::vector<int> SortedGCDPairQueries::gcdValues(std::vector<int> &nums, std::vector<long long> &queries) {
