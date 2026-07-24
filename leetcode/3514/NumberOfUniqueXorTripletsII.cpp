@@ -4,6 +4,7 @@
 
 #include "NumberOfUniqueXorTripletsII.h"
 
+#include <algorithm>
 #include <iostream>
 #include <numeric>
 #include <ostream>
@@ -11,7 +12,8 @@
 namespace leetcode {
     int NumberOfUniqueXorTripletsII::uniqueXorTriplets(std::vector<int>& nums) {
         int n = nums.size();
-        int u = 1 << std::bit_width(1u * std::ranges::max(nums));
+        int maxVal = *std::max_element(nums.begin(), nums.end());
+        int u = 1 << std::bit_width(1u * maxVal);
 
         std::vector<int8_t> has(u);
         for (int i = 0; i < n; ++i) {
