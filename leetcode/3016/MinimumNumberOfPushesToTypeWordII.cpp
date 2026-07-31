@@ -4,6 +4,7 @@
 
 #include "MinimumNumberOfPushesToTypeWordII.h"
 
+#include <algorithm>
 #include <iostream>
 #include <ostream>
 
@@ -19,7 +20,7 @@ namespace leetcode {
         for (char c: word) {
             cnt[c - 'a']++;
         }
-        std::ranges::sort(cnt.begin(), cnt.end());
+        sort(cnt.begin(), cnt.end());
 
         int ans = 0;
         for (int i = 0; i < 26; i++) {
