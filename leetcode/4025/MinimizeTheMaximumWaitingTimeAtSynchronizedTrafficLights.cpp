@@ -4,6 +4,7 @@
 
 #include "MinimizeTheMaximumWaitingTimeAtSynchronizedTrafficLights.h"
 
+#include <algorithm>
 #include <iostream>
 
 namespace leetcode {
