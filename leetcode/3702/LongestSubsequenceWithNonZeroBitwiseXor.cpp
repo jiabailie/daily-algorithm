@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <numeric>
+#include <ranges>
 
 namespace leetcode {
     int LongestSubsequenceWithNonZeroBitwiseXor::longestSubsequence(std::vector<int> &nums) {
