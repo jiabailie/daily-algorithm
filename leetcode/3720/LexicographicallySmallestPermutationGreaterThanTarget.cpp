@@ -41,6 +41,7 @@ namespace leetcode {
                 return target;
             }
         }
+        return "";
     }
 
     void LexicographicallySmallestPermutationGreaterThanTarget::test() {
